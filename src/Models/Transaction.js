@@ -37,7 +37,7 @@ export default class Transaction {
     this.applyMinRule(operationCommissionRule);
     this.applyMaxRule(operationCommissionRule);
     this.applyWeekLimitRule(operationCommissionRule, transactionsHistory);
-    this.fixedCommission();
+    this.roundingCommission();
   }
 
   /**
@@ -106,7 +106,7 @@ export default class Transaction {
    * Conversion of the commission value into the desired format with two characters after the comma
    *
    */
-  fixedCommission() {
+  roundingCommission() {
     this.commission = (Math.ceil(this.commission * 100) / 100).toFixed(2);
   }
 }
