@@ -1,0 +1,41 @@
+{
+  "name": "node-js-commission-fees-task",
+  "version": "1.0.0",
+  "description": "node-js-commission-fees-task",
+  "main": "app.js",
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint --fix src/**/*.js test/**/*.js",
+    "test": "mocha './test/**/*.test.js'",
+    "coverage": "nyc mocha --experimental-loader=@istanbuljs/esm-loader-hook --recursive"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/naymkazp/commission-fees-task.git"
+  },
+  "keywords": [],
+  "author": "“Dmitriy <“naymwm@gmail.com”>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/naymkazp/commission-fees-task/issues"
+  },
+  "homepage": "https://github.com/naymkazp/commission-fees-task#readme",
+  "devDependencies": {
+    "@istanbuljs/esm-loader-hook": "^0.1.2",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.21.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsdoc": "^32.3.0",
+    "eslint-plugin-mocha": "^8.1.0",
+    "mocha": "^8.3.1",
+    "nyc": "^15.1.0"
+  },
+  "dependencies": {
+    "node-cache": "^5.1.2",
+    "axios": "^0.21.1"
+  }
+}
