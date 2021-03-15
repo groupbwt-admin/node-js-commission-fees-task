@@ -4,7 +4,7 @@ export default class User {
   constructor({ id, type }) {
     this.id = id;
     this.type = type;
-    this.transactionsList = [];
+    this.transactionsHistory = [];
   }
 
   /**
@@ -21,10 +21,10 @@ export default class User {
     const newTransaction = new Transaction(transactionData);
     newTransaction.calculateCommission({
       userType: this.type,
-      oldTransactionsList: this.getTransactionsByCurrentWeek(newTransaction),
+      transactionsHistory: this.getTransactionsByCurrentWeek(newTransaction),
       cashCommissionFees,
     });
-    this.transactionsList.push(newTransaction);
+    this.transactionsHistory.push(newTransaction);
   }
 
   /**
@@ -34,7 +34,7 @@ export default class User {
    * @returns [Transaction] Transaction list
    */
   getTransactionsByCurrentWeek(transaction) {
-    return this.transactionsList.filter(
+    return this.transactionsHistory.filter(
       (oldTransaction) => transaction.week === oldTransaction.week,
     );
   }

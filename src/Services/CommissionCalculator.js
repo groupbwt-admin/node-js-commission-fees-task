@@ -53,7 +53,7 @@ export default class CommissionCalculator {
   /**
    * Processing of all transactions.
    * The processing creates an array of users,
-   * and distributes transactions to the transactionsList fields of each user.
+   * and distributes transactions to the transactionsHistory fields of each user.
    *
    * @returns The list of transactions with calculated commissions
    */
@@ -81,8 +81,8 @@ export default class CommissionCalculator {
       cashCommissionFees: this.cashCommissionFees,
     });
 
-    return this.users[transactionData.user_id].transactionsList[
-      this.users[transactionData.user_id].transactionsList.length - 1
+    return this.users[transactionData.user_id].transactionsHistory[
+      this.users[transactionData.user_id].transactionsHistory.length - 1
     ];
   }
 }

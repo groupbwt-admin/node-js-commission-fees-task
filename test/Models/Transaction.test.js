@@ -8,7 +8,7 @@ describe('Transaction model tests', () => {
     const transaction = new Transaction(transactionsList[0]);
     transaction.calculateCommission({
       userType: transactionsList[0].user_type,
-      oldTransactionsList: [],
+      transactionsHistory: [],
       cashCommissionFees,
     });
     assert.strictEqual(transaction.commission, '0.06');
@@ -21,7 +21,7 @@ describe('Transaction model tests', () => {
       () => {
         transaction.calculateCommission({
           userType: transactionsList[0].user_type,
-          oldTransactionsList: [],
+          transactionsHistory: [],
           cashCommissionFees,
         });
       },
@@ -37,7 +37,7 @@ describe('Transaction model tests', () => {
       () => {
         transaction.calculateCommission({
           userType: 'not_authorized',
-          oldTransactionsList: [],
+          transactionsHistory: [],
           cashCommissionFees,
         });
       },
@@ -52,7 +52,7 @@ describe('Transaction model tests', () => {
     transaction.operation.amount = 100000;
     transaction.calculateCommission({
       userType: transactionsList[0].user_type,
-      oldTransactionsList: [],
+      transactionsHistory: [],
       cashCommissionFees,
     });
     assert.strictEqual(transaction.commission, '5.00');
@@ -64,7 +64,7 @@ describe('Transaction model tests', () => {
     transaction.operation.amount = 10;
     transaction.calculateCommission({
       userType: transactionsList[1].user_type,
-      oldTransactionsList: [],
+      transactionsHistory: [],
       cashCommissionFees,
     });
     assert.strictEqual(transaction.commission, '0.50');
@@ -75,7 +75,7 @@ describe('Transaction model tests', () => {
     const transaction = new Transaction(transactionsList[3]);
     transaction.calculateCommission({
       userType: transactionsList[3].user_type,
-      oldTransactionsList: [],
+      transactionsHistory: [],
       cashCommissionFees,
     });
     assert.strictEqual(transaction.commission, '0.00');
@@ -85,7 +85,7 @@ describe('Transaction model tests', () => {
     const transaction = new Transaction(transactionsList[3]);
     transaction.calculateCommission({
       userType: transactionsList[3].user_type,
-      oldTransactionsList: transactionsList.slice(0, 3),
+      transactionsHistory: transactionsList.slice(0, 3),
       cashCommissionFees,
     });
     assert.strictEqual(transaction.commission, '3.00');

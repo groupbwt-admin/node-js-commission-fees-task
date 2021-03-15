@@ -18,12 +18,12 @@ export default class Transaction {
    *
    * @param userType.userType
    * @param userType                        natural or juridical
-   * @param oldTransactionsList             Array of transactions
+   * @param transactionsHistory             Array of transactions
    * @param cashCommissionFees              Commission object
-   * @param userType.oldTransactionsList
+   * @param userType.transactionsHistory
    * @param userType.cashCommissionFees
    */
-  calculateCommission({ userType, oldTransactionsList, cashCommissionFees }) {
+  calculateCommission({ userType, transactionsHistory, cashCommissionFees }) {
     this.commission = 0;
     if (!cashCommissionFees[this.type]) {
       throw new Error('This type of operation is not supported');
@@ -36,7 +36,7 @@ export default class Transaction {
 
     this.applyMinRule(operationCommissionRule);
     this.applyMaxRule(operationCommissionRule);
-    this.applyWeekLimitRule(operationCommissionRule, oldTransactionsList);
+    this.applyWeekLimitRule(operationCommissionRule, transactionsHistory);
     this.fixedCommission();
   }
 
@@ -78,16 +78,16 @@ export default class Transaction {
    * Apply week limit commission rule to calculate
    *
    * @param operationCommissionRule
-   * @param oldTransactionsList
+   * @param transactionsHistory
    */
-  applyWeekLimitRule(operationCommissionRule, oldTransactionsList) {
+  applyWeekLimitRule(operationCommissionRule, transactionsHistory) {
     if (
       !operationCommissionRule.week_limit
       || operationCommissionRule.week_limit.currency !== this.operation.currency
     ) {
       return;
     }
-    const transferredInAWeek = oldTransactionsList.reduce(
+    const transferredInAWeek = transactionsHistory.reduce(
       (total, transaction) => total
           + (transaction.type === 'cash_out' && transaction.operation.amount)
           || 0,
@@ -107,7 +107,6 @@ export default class Transaction {
    *
    */
   fixedCommission() {
-    const fixed = parseFloat(this.commission.toFixed(2));
-    this.commission = fixed < this.commission ? (fixed + 0.01).toFixed(2) : fixed.toFixed(2);
+    this.commission = (Math.ceil(this.commission * 100) / 100).toFixed(2);
   }
 }

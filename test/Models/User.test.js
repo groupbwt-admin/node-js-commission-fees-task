@@ -25,7 +25,7 @@ describe('User model tests', () => {
       cashCommissionFees,
     });
 
-    assert.strictEqual(user.transactionsList.length, 1);
+    assert.strictEqual(user.transactionsHistory.length, 1);
   });
 
   it('Add transactions to user history', () => {
@@ -48,6 +48,6 @@ describe('User model tests', () => {
       cashCommissionFees,
     });
 
-    assert.strictEqual(user.transactionsList.length, 3);
+    assert.strictEqual(user.transactionsHistory.length, 3);
   });
 });
