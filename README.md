@@ -2,6 +2,7 @@
 
 ### To run demo
 ```javascript
+cp .env.example .env
 npm i
 node app.js input.json
 ```
