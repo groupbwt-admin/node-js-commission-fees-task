@@ -67,9 +67,11 @@ class Cache {
    * Save cache data to disk
    */
   saveCache() {
+    fs.mkdirSync('./tmp', { recursive: true });
+
     if (this.cache.keys().length) {
       fs.writeFileSync(
-        path.join('./tmp/.cache.json'),
+        './tmp/.cache.json',
         JSON.stringify(this.cache.data),
       );
     } else {
